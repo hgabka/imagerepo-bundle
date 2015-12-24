@@ -1,0 +1,111 @@
+<?php
+
+namespace HG\ImageRepositoryBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * HGImage
+ */
+class HGImage
+{
+    /**
+     * @var integer
+     */
+    private $img_id;
+
+    /**
+     * @var string
+     */
+    private $img_type;
+
+    /**
+     * @var string
+     */
+    private $img_extension;
+
+    /**
+     * @var \HG\FileRepositoryBundle\Entity\HGFile
+     */
+    private $HGFile;
+
+
+    /**
+     * Get img_id
+     *
+     * @return integer 
+     */
+    public function getImgId()
+    {
+        return $this->img_id;
+    }
+
+    /**
+     * Set img_type
+     *
+     * @param string $imgType
+     * @return HGImage
+     */
+    public function setImgType($imgType)
+    {
+        $this->img_type = $imgType;
+    
+        return $this;
+    }
+
+    /**
+     * Get img_type
+     *
+     * @return string 
+     */
+    public function getImgType()
+    {
+        return $this->img_type;
+    }
+
+    /**
+     * Set img_extension
+     *
+     * @param string $imgExtension
+     * @return HGImage
+     */
+    public function setImgExtension($imgExtension)
+    {
+        $this->img_extension = $imgExtension;
+    
+        return $this;
+    }
+
+    /**
+     * Get img_extension
+     *
+     * @return string 
+     */
+    public function getImgExtension()
+    {
+        return $this->img_extension;
+    }
+
+    /**
+     * Set HGFile
+     *
+     * @param \HG\FileRepositoryBundle\Entity\HGFile $hGFile
+     * @return HGImage
+     */
+    public function setHGFile(\HG\FileRepositoryBundle\Entity\HGFile $hGFile = null)
+    {
+        $this->HGFile = $hGFile;
+    
+        return $this;
+    }
+
+    /**
+     * Get HGFile
+     *
+     * @return \HG\FileRepositoryBundle\Entity\HGFile 
+     */
+    public function getHGFile()
+    {
+        return $this->HGFile;
+    }
+}

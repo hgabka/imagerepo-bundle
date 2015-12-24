@@ -1,0 +1,41 @@
+parameters:
+#    hg_image_repository.example.class: HG\ImageRepositoryBundle\Example
+
+services:
+#    hg_image_repository.example:
+#        class: %hg_image_repository.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
+    hg_image_repository.image_creator:
+        class: %hg_image_repository.image_creator_class%
+        arguments: [%hg_image_repository.image_transform_settings%]
+    hg_image_repository.imagemanager:
+        class: %hg_image_repository.manager_class%
+        arguments: [@hg_file_repository.filemanager, @hg_file_repository.upload_manager, @hg_image_repository.image_creator, @doctrine.orm.entity_manager, %hg_image_repository.config_settings%]
+        
+    hg_image_repository.twig.image_repository_extension:
+        class: HG\ImageRepositoryBundle\Twig\HGImageRepositoryExtension
+        arguments: [@hg_image_repository.imagemanager]
+        tags:
+            - { name: twig.extension }   
+                             
+    hg_image_repository.subscriber:
+        class: HG\ImageRepositoryBundle\EventListener\ImageRepositorySubscriber
+        arguments: ["@service_container"]
+        tags:
+            - { name: doctrine.event_subscriber, connection: default }
+            
+    hg_image_repository.type.image_repository:
+        class: HG\ImageRepositoryBundle\Form\Type\ImageRepositoryType
+        arguments: ["@hg_image_repository.imagemanager", "@hg_file_repository.upload_manager", %hg_image_repository.upload_request_type%]
+        tags:
+            - { name: form.type, alias: image_repository }
+            
+    hg_image_repository.type.image_repository_uploadify:
+        class: HG\ImageRepositoryBundle\Form\Type\ImageRepositoryUploadifyType
+        arguments: ["@hg_image_repository.imagemanager"]
+        calls:
+            - [setParamName, ['%hg_utils.session_param_name%']]
+            - [setRouter, ['@router']]
+        tags:
+            - { name: form.type, alias: image_uploadify }
+        

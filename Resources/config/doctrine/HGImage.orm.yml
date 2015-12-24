@@ -1,0 +1,24 @@
+HG\ImageRepositoryBundle\Entity\HGImage:
+    type: entity
+    table: hg_image
+    repositoryClass: HG\ImageRepositoryBundle\Entity\HGImageRepository
+    id:
+        img_id:
+            type: integer
+            generator: { strategy: AUTO }
+    oneToOne:
+      HGFile:
+        targetEntity: HG\FileRepositoryBundle\Entity\HGFile
+        joinColumn:
+            name: img_fil_id
+            referencedColumnName: fil_id            
+    fields:
+        img_type:
+            type: string
+            length: 128
+            notnull: false
+        img_extension:
+            type: string
+            length: 10
+            notnull: false
+

@@ -1,0 +1,30 @@
+{
+    "name": "hgabka/imagerepo-bundle",
+    "type": "symfony-bundle",
+    "description": "hgabka ImageRepositoryBundle",
+    "keywords": ["Image management"],
+    "homepage": "http://sfhungary.eu",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Gabor Harmat",
+            "email": "hgabka@sfhungary.eu"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.3.2",
+        "symfony/framework-bundle": "~2.3|~3.0",
+		"hgabka/filerepo-bundle": "dev-master"
+    },
+    "require-dev": {
+        "twig/twig": "~1.5",
+        "doctrine/doctrine-bundle": "*",
+        "symfony/yaml": "~2.3|~3.0",
+        "symfony/validator": "~2.3|~3.0"
+    },
+    "autoload": {
+        "psr-0": { "HG\\ImageRepositoryBundle": "" }
+    },
+    "target-dir": "HG/ImageRepositoryBundle"
+}

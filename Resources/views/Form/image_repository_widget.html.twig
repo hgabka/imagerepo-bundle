@@ -1,0 +1,22 @@
+{% block image_repository_widget %}
+  {% spaceless %}
+
+  {{ form_widget(form.id) }}
+  {{ form_widget(form.delete) }}
+  <div class="image_repo_delete" style="display:{{ value.id is not empty ? 'block' : 'none'}}">
+
+  {% set image = value.id is not empty ? '<img class="' ~ image_preview_class  ~ '" src="' ~ image_repository_asset(value.id, image_preview_size) ~ '" />' : '' %}
+
+  {% set onclick="jQuery(this).parents('div.image_repo_delete').next('div.image_repo_file').show();jQuery('#" ~ id ~ "_delete').val('1');jQuery(this).parents('div.image_repo_delete').hide();return false;" %}
+  {% set delete = delete_link_type == 'anchor' ? '<a class="' ~ delete_link_class ~ '" onclick="' ~ onclick ~ '" href="#" />' ~ delete_link_text ~ '</a>' : '<input class="' ~ delete_link_class ~ '" type="button" onclick="' ~ onclick ~ '" value="' ~ delete_link_text ~ '" />' %}
+
+  {{ template|replace({ '%image_preview%':  image, '%delete_link%'  : delete, '%filename%'  : image_filename, })|raw }}
+
+  </div>
+  <div class="image_repo_file" style="display:{{ value.id is empty ? 'block' : 'none'}}">
+    {{  form_errors(form.file) }}
+    {{  form_widget(form.file) }}
+  </div>
+
+  {% endspaceless %}
+{% endblock %}
